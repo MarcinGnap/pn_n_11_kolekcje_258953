@@ -18,8 +18,8 @@ public class NewPerson {
     public NewPerson(String first_name, String last_name, String job_name, int birth_year) throws PersonException {
         setRandomFirstName(first_name);
         setRandomLastName(last_name);
-        setRandomJob(job_name);
         setRandomBirthYear(birth_year);
+        setRandomJob(job_name);
     }
 
     public String getFirstName() {
@@ -46,6 +46,15 @@ public class NewPerson {
         this.lastName = last_name;
     }
 
+    public int getBirthYear() {
+        return birthYear;
+    }
+
+    public void  setRandomBirthYear(int birth_year) throws PersonException {
+        birth_year = new Random().nextInt(1900 - 2002);
+        this.birthYear = birth_year;
+    }
+
     public String getJob() {
         return job;
     }
@@ -54,15 +63,6 @@ public class NewPerson {
         String sJobNames[] = {"Kucharz", "Stolarz", "Maszynista", "Piekarz", "Mechanik", "Hydraulik", "Ogrodnik", "Prawnik", "Pisarz", "Nauczyciel", "Lekarz", "Bezrobotny"};
         job_name = sJobNames[new Random().nextInt(sJobNames.length)];
         this.job = job_name;
-    }
-
-    public int getBirthYear() {
-        return birthYear;
-    }
-
-    public void  setRandomBirthYear(int birth_year) throws PersonException {
-        birth_year = new Random().nextInt(1900 - 2002);
-        this.birthYear = birth_year;
     }
 
     @Override
@@ -83,6 +83,26 @@ public class NewPerson {
         }
     }
 
+    public static NewPerson readFromFile(BufferedReader reader) throws PersonException{
+        try {
+            String line = reader.readLine();
+            String[] txt = line.split("#");
+            NewPerson person = new NewPerson(txt[0], txt[1], txt[2], txt[3]);
+            return person;
+        } catch(IOException e){
+            throw new PersonException("Wystąpił błąd podczas odczytu danych z pliku.");
+        }
+    }
+
+    public static NewPerson readFromFile(String file_name) throws PersonException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File(file_name)))) {
+            return NewPerson.readFromFile(reader);
+        } catch (FileNotFoundException e){
+            throw new PersonException("Nie odnaleziono pliku " + file_name);
+        } catch(IOException e){
+            throw new PersonException("Wystąpił błąd podczas odczytu danych z pliku.");
+        }
+    }
 
 
 }
