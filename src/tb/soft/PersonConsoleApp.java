@@ -34,10 +34,10 @@ public class PersonConsoleApp {
 
     private static final String ADD_MENU =
             "    M E N U   A D D  \n" +
-                    "1 - Dodanie nowego elementu        \n" +
-                    "2 - Dodanie tego samego elementu   \n" +
-                    "3 - Dodanie takiego samego elementu\n" +
-                    "0 - Powrót                         \n";
+                    "1 - Dodanie nowego elementu            \n" +
+                    "2 - Dodanie tego samego elementu       \n" +
+                    "3 - Dodanie takiego samego elementu    \n" +
+                    "0 - Powrót                             \n";
 
 
     /**
@@ -59,7 +59,7 @@ public class PersonConsoleApp {
     /*
      *  Referencja do obiektu, który zawiera dane aktualnej osoby.
      */
-    private tb.soft.Person currentPerson = null;
+    private tb.soft.NewPerson currentPerson = null;
 
 
     /*
@@ -106,7 +106,7 @@ public class PersonConsoleApp {
      * Metoda wyświetla w oknie konsoli dane osoby reprezentowanej
      * przez obiekt klasy Person
      */
-    static void showPerson(tb.soft.Person person) {
+    static void showPerson(tb.soft.NewPerson person) {
         StringBuilder sb = new StringBuilder();
 
         if (person != null) {
@@ -128,7 +128,7 @@ public class PersonConsoleApp {
      * klasy Person. Jeśli zostaną wykryte niepoprawne dane,
      * to zostanie zgłoszony wyjątek, który zawiera komunikat o błędzie.
      */
-    static tb.soft.Person createNewPerson(){
+    static tb.soft.NewPerson createNewPerson(){
         String first_name = UI.enterString("Podaj imię: ");
         String last_name = UI.enterString("Podaj nazwisko: ");
         String birth_year = UI.enterString("Podaj rok ur.: ");
@@ -149,7 +149,7 @@ public class PersonConsoleApp {
             UI.printErrorMessage(e.getMessage());
             return null;
         }
-        return person;
+        return NewPerson;
     }
 
     private void SetCollection() {

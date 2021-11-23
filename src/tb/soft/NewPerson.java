@@ -26,10 +26,18 @@ public class NewPerson {
         return firstName;
     }
 
+    public String geFirstName() {
+        return firstName;
+    }
+
     public void  setRandomFirstName(String first_name) throws PersonException {
         String sFirstNames[] = {"Marcin" , "Kinga", "Stefan", "Alina", "Ewa", "Mariusz", "Mateusz", "Roman", "Emilia", "Arkadiusz", "Maria", "Julia"};
         first_name = sFirstNames[new Random().nextInt(sFirstNames.length)];
         this.firstName = first_name;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public void  setRandomLastName(String last_name) throws PersonException {
@@ -38,15 +46,43 @@ public class NewPerson {
         this.lastName = last_name;
     }
 
+    public String getJob() {
+        return job;
+    }
+
     public void  setRandomJob(String job_name) throws PersonException {
         String sJobNames[] = {"Kucharz", "Stolarz", "Maszynista", "Piekarz", "Mechanik", "Hydraulik", "Ogrodnik", "Prawnik", "Pisarz", "Nauczyciel", "Lekarz", "Bezrobotny"};
         job_name = sJobNames[new Random().nextInt(sJobNames.length)];
         this.job = job_name;
     }
 
+    public int getBirthYear() {
+        return birthYear;
+    }
+
     public void  setRandomBirthYear(int birth_year) throws PersonException {
         birth_year = new Random().nextInt(1900 - 2002);
         this.birthYear = birth_year;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
+
+    public static void printToFile(PrintWriter writer, NewPerson person){
+        writer.println(person.firstName + "#" + person.lastName +
+                "#" + person.birthYear + "#" + person.job);
+    }
+
+    public static void printToFile(String file_name, NewPerson person) throws PersonException {
+        try (PrintWriter writer = new PrintWriter(file_name)) {
+            printToFile(writer, person);
+        } catch (FileNotFoundException e){
+            throw new PersonException("Nie odnaleziono pliku " + file_name);
+        }
+    }
+
+
 
 }
