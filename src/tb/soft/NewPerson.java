@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.Random;
 
 public class NewPerson {
@@ -119,5 +118,4 @@ public class NewPerson {
         }
         return person;
     }
-
 }
