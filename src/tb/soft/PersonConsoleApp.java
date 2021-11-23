@@ -128,29 +128,6 @@ public class PersonConsoleApp {
      * klasy Person. Jeśli zostaną wykryte niepoprawne dane,
      * to zostanie zgłoszony wyjątek, który zawiera komunikat o błędzie.
      */
-    static tb.soft.NewPerson createNewPerson(){
-        String first_name = UI.enterString("Podaj imię: ");
-        String last_name = UI.enterString("Podaj nazwisko: ");
-        String birth_year = UI.enterString("Podaj rok ur.: ");
-        UI.printMessage("Dozwolone stanowiska:" + Arrays.deepToString(tb.soft.PersonJob.values()));
-        String job_name = UI.enterString("Podaj stanowisko: ");
-        tb.soft.Person person;
-        try {
-            // Utworzenie nowego obiektu klasy Person oraz
-            // ustawienie wartości wszystkich atrybutów.
-            person = new tb.soft.Person(first_name, last_name);
-            person.setBirthYear(birth_year);
-            person.setJob(job_name);
-        } catch (tb.soft.PersonException e) {
-            // Tu są wychwytywane wyjątki zgłaszane przez metody klasy Person,
-            // gdy nie są spełnione ograniczenia nałożone na dopuszczalne wartości
-            // poszczególnych atrybutów.
-            // Drukowanie komunikatu o błędzie zgłoszonym za pomocą wyjątku PersonException.
-            UI.printErrorMessage(e.getMessage());
-            return null;
-        }
-        return NewPerson;
-    }
 
     private void SetCollection() {
         while (true) {

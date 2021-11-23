@@ -104,5 +104,15 @@ public class NewPerson {
         }
     }
 
+    static NewPerson createNewPerson(String first_name, String last_name, String job_name, int birth_year) throws PersonException {
+        NewPerson person = null;
+        try {
+            person = new NewPerson(first_name, last_name, job_name);
+            person.setRandomBirthYear(birth_year);
+        } catch (PersonException e) {
+            throw new PersonException("Wystąpił błąd podczas tworzenia obiaktu klasy NewPerson.");
+        }
+        return person;
+    }
 
 }
