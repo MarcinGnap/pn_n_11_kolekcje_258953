@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Random;
 
 public class NewPerson {
@@ -104,7 +105,11 @@ public class NewPerson {
         }
     }
 
-    static NewPerson createNewPerson(String first_name, String last_name, String job_name, int birth_year) throws PersonException {
+    static NewPerson createNewPerson() throws PersonException {
+        String first_name = new String();
+        String last_name = new String();
+        int birth_year = Integer.parseInt(null);
+        String job_name = new String();
         NewPerson person = null;
         try {
             person = new NewPerson(first_name, last_name, job_name);

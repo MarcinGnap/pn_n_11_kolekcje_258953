@@ -48,7 +48,7 @@ public class PersonConsoleApp {
     private static final ConsoleUserDialog UI = new ConsoleUserDialog();
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PersonException {
         // Utworzenie obiektu aplikacji konsolowej
         // oraz uruchomienie głównej pętli aplikacji.
         PersonConsoleApp application = new PersonConsoleApp();
@@ -68,7 +68,7 @@ public class PersonConsoleApp {
      *         w której program się zatrzymuje aż do zakończenia
      *         działania za pomocą metody System.exit(0);
      */
-    public void runMainLoop() {
+    public void runMainLoop() throws PersonException {
         UI.printMessage(GREETING_MESSAGE);
 
         while (true) {
@@ -127,7 +127,7 @@ public class PersonConsoleApp {
      * to zostanie zgłoszony wyjątek, który zawiera komunikat o błędzie.
      */
 
-    private void SetCollection() {
+    private void SetCollection() throws PersonException {
         while (true) {
             UI.clearConsole();
             showCurrentPerson();
@@ -150,7 +150,7 @@ public class PersonConsoleApp {
         }
     }
 
-    private void ListCollection() {
+    private void ListCollection() throws PersonException {
         while (true) {
             UI.clearConsole();
             showCurrentPerson();
@@ -173,7 +173,7 @@ public class PersonConsoleApp {
         }
     }
 
-    private void MapCollection() {
+    private void MapCollection() throws PersonException {
         while (true) {
             UI.clearConsole();
             showCurrentPerson();
@@ -196,12 +196,13 @@ public class PersonConsoleApp {
         }
     }
 
-    private void AddSetPosition() {
+    private void AddSetPosition() throws PersonException {
         while (true) {
             UI.clearConsole();
                 switch (UI.enterInt(ADD_MENU + "==>> ")) {
                     case 1:
                         // Dodanie nowego elementu.
+                        currentPerson = NewPerson.createNewPerson();
                         break;
                     case 2:
                         // Dodanie tego samego elementu.
@@ -214,12 +215,13 @@ public class PersonConsoleApp {
         }
     }
 
-    private void AddListPosition() {
+    private void AddListPosition() throws PersonException {
         while (true) {
             UI.clearConsole();
                 switch (UI.enterInt(ADD_MENU + "==>> ")) {
                     case 1:
                         // Dodanie nowego elementu.
+                        currentPerson = NewPerson.createNewPerson();
                         break;
                     case 2:
                         // Dodanie tego samego elementu.
@@ -232,12 +234,13 @@ public class PersonConsoleApp {
         }
     }
 
-    private void AddMapPosition() {
+    private void AddMapPosition() throws PersonException {
         while (true) {
             UI.clearConsole();
                 switch (UI.enterInt(ADD_MENU + "==>> ")) {
                     case 1:
                         // Dodanie nowego elementu.
+                        currentPerson = NewPerson.createNewPerson();
                         break;
                     case 2:
                         // Dodanie tego samego elementu.
