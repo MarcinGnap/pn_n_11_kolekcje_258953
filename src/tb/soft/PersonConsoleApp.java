@@ -45,7 +45,7 @@ public class PersonConsoleApp {
      * prostych metod do realizacji dialogu z użytkownikiem
      * w oknie konsoli tekstowej.
      */
-    private static final tb.soft.ConsoleUserDialog UI = new tb.soft.ConsoleUserDialog();
+    private static final ConsoleUserDialog UI = new ConsoleUserDialog();
 
 
     public static void main(String[] args) {
@@ -59,7 +59,7 @@ public class PersonConsoleApp {
     /*
      *  Referencja do obiektu, który zawiera dane aktualnej osoby.
      */
-    private tb.soft.NewPerson currentPerson = null;
+    private NewPerson currentPerson = null;
 
 
     /*
@@ -73,8 +73,6 @@ public class PersonConsoleApp {
 
         while (true) {
             UI.clearConsole();
-            showCurrentPerson();
-
                 switch (UI.enterInt(MAIN_MENU + "==>> ")) {
                     case 1:
                         SetCollection();
@@ -132,6 +130,7 @@ public class PersonConsoleApp {
     private void SetCollection() {
         while (true) {
             UI.clearConsole();
+            showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
@@ -154,6 +153,7 @@ public class PersonConsoleApp {
     private void ListCollection() {
         while (true) {
             UI.clearConsole();
+            showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
@@ -176,6 +176,7 @@ public class PersonConsoleApp {
     private void MapCollection() {
         while (true) {
             UI.clearConsole();
+            showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
