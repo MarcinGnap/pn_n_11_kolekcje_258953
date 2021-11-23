@@ -15,10 +15,9 @@ public class NewPerson {
     private int birthYear;
     private String job;
 
-    public NewPerson(String first_name, String last_name, String job_name, int birth_year) throws PersonException {
+    public NewPerson(String first_name, String last_name, String job_name) throws PersonException {
         setRandomFirstName(first_name);
         setRandomLastName(last_name);
-        setRandomBirthYear(birth_year);
         setRandomJob(job_name);
     }
 
@@ -87,7 +86,8 @@ public class NewPerson {
         try {
             String line = reader.readLine();
             String[] txt = line.split("#");
-            NewPerson person = new NewPerson(txt[0], txt[1], txt[2], txt[3]);
+            NewPerson person = new NewPerson(txt[0], txt[1], txt[3]);
+            person.setRandomBirthYear(Integer.parseInt(txt[2]));
             return person;
         } catch(IOException e){
             throw new PersonException("Wystąpił błąd podczas odczytu danych z pliku.");
