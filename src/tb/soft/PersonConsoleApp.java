@@ -132,6 +132,8 @@ public class PersonConsoleApp {
             UI.clearConsole();
             Set<NewPerson> hSNewPerson = new HashSet<>();
             Set<NewPerson> tSNewPerson = new TreeSet<>();
+            Set<BetterPerson> hSBetterPerson = new HashSet<>();
+            Set<BetterPerson> tSBetterPerson = new TreeSet<>();
             showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
@@ -143,12 +145,45 @@ public class PersonConsoleApp {
                         break;
                     case 3:
                         // Wypisanie elementów.
+                        System.out.println("HashSet dla obiektów NewPerson:");
                         for(NewPerson element: hSNewPerson) {
-                            System.out.println(element + " ");
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
+                        }
+                        System.out.println("\n" + "TreeSet dla obiektów NewPerson:");
+                        for(NewPerson element: tSNewPerson) {
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
+                        }
+                        System.out.println("\n" + "HasheSet dla obiektów BetterPerson:");
+                        for(BetterPerson element: hSBetterPerson) {
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
+                        }
+                        System.out.println("\n" + "TreeSet dla obiektów BetterPerson:");
+                        for(BetterPerson element: tSBetterPerson) {
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
                         }
                         break;
                     case 4:
                         // Różnice w metodach equals() i hashCod().
+                        System.out.println("Equals dla HashSet bez zdefiniowanej metody: " + hSNewPerson.equals(tSBetterPerson));
+                        System.out.println("Equals dla TreeSet ze zdefiniowana metoda: " + tSBetterPerson.equals(hSNewPerson));
+                        System.out.println("Equals dla HashSet bez zdefiniowanej metody: " + hSNewPerson.equals(tSBetterPerson));
+                        System.out.println("Equals dla TreeSet ze zdefiniowana metoda: " + tSBetterPerson.equals(hSNewPerson) + "\n");
+                        System.out.println("HashCode dla HashSet bez zdefiniowanej metody: " + hSNewPerson.hashCode());
+                        System.out.println("HashCode dla TreeSet ze zdefiniowana metoda: " + tSBetterPerson.hashCode());
+                        System.out.println("HashCode dla HashSet bez zdefiniowanej metody: " + hSNewPerson.hashCode());
+                        System.out.println("HashCode dla TreeSet ze zdefiniowana metoda: " + tSBetterPerson.hashCode() + "\n");
                         break;
                     case 0: return;
                 }  // koniec instrukcji switch
@@ -183,27 +218,73 @@ public class PersonConsoleApp {
             UI.clearConsole();
             ArrayList<NewPerson> aLNewPerson = new ArrayList<>();
             LinkedList<NewPerson> lLNewPerson = new LinkedList<>();
+            ArrayList<BetterPerson> aLBetterPerson = new ArrayList<>();
+            LinkedList<BetterPerson> lLBetterPerson = new LinkedList<>();
             showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
-                        AddListPosition(aLNewPerson, lLNewPerson);
+                        AddListPosition(aLNewPerson, lLNewPerson, aLBetterPerson, lLBetterPerson);
                         break;
                     case 2:
                         // Usunięcie elementu.
+                        int iNr;
+                        Scanner scanner = new Scanner(System.in);
+                        System.out.print("Podaj pozycje, z ktorej ma zostac usuniety obiekt: ");
+                        iNr = scanner.nextInt();
+                        aLNewPerson.remove(iNr);
+                        lLNewPerson.remove(iNr);
+                        aLBetterPerson.remove(iNr);
+                        aLBetterPerson.remove(iNr);
                         break;
                     case 3:
                         // Wypisanie elementów.
+                        System.out.println("ArrayList dla obiektów NewPerson:");
+                        for(NewPerson element: aLNewPerson) {
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
+                        }
+                        System.out.println("\n" + "LinkedList dla obiektów NewPerson:");
+                        for(NewPerson element: lLNewPerson) {
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
+                        }
+                        System.out.println("\n" + "ArrayList dla obiektów BetterPerson:");
+                        for(BetterPerson element: aLBetterPerson) {
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
+                        }
+                        System.out.println("\n" + "LinkedList dla obiektów BetterPerson:");
+                        for(BetterPerson element: lLBetterPerson) {
+                            System.out.print(element.getFirstName() + " ");
+                            System.out.print(element.getLastName() + " ");
+                            System.out.print(element.getBirthYear() + " ");
+                            System.out.println(element.getJob() + " ");
+                        }
                         break;
                     case 4:
                         // Różnice w metodach equals() i hashCod().
+                        System.out.println("Equals dla ArrayList bez zdefiniowanej metody: " + aLNewPerson.equals(aLBetterPerson));
+                        System.out.println("Equals dla ArrayList ze zdefiniowana metoda: " + aLBetterPerson.equals(aLNewPerson));
+                        System.out.println("Equals dla LinkedList bez zdefiniowanej metody: " + lLNewPerson.equals(lLBetterPerson));
+                        System.out.println("Equals dla LinkedList ze zdefiniowana metoda: " + lLBetterPerson.equals(lLNewPerson) + "\n");
+                        System.out.println("HashCode dla ArrayList bez zdefiniowanej metody: " + aLNewPerson.hashCode());
+                        System.out.println("HashCode dla ArrayList ze zdefiniowana metoda: " + aLBetterPerson.hashCode());
+                        System.out.println("HashCode dla LinkedList bez zdefiniowanej metody: " + lLNewPerson.hashCode());
+                        System.out.println("HashCode dla LinkedList ze zdefiniowana metoda: " + lLBetterPerson.hashCode() + "\n");
                         break;
                     case 0: return;
                 }  // koniec instrukcji switch
         }
     }
 
-    private void AddListPosition(ArrayList aLNewPerson, LinkedList lLNewPerson) throws PersonException {
+    private void AddListPosition(ArrayList aLNewPerson, LinkedList lLNewPerson, ArrayList aLBetterPerson, LinkedList lLBetterPerson) throws PersonException {
         while (true) {
             UI.clearConsole();
             switch (UI.enterInt(ADD_MENU + "==>> ")) {
@@ -231,11 +312,13 @@ public class PersonConsoleApp {
             UI.clearConsole();
             HashMap<Integer, NewPerson> hMNewPerson = new HashMap<>();
             TreeMap<Integer, NewPerson> tMNewPerson = new TreeMap<>();
+            HashMap<Integer, BetterPerson> hMBetterPerson = new HashMap<>();
+            TreeMap<Integer, BetterPerson> tMBetterPerson = new TreeMap<>();
             showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
-                        AddMapPosition(hMNewPerson, tMNewPerson);
+                        AddMapPosition(hMNewPerson, tMNewPerson, hMBetterPerson, tMBetterPerson);
                         break;
                     case 2:
                         // Usunięcie elementu.
@@ -244,6 +327,22 @@ public class PersonConsoleApp {
                         break;
                     case 3:
                         // Wypisanie elementów.
+                        System.out.println("HashMap dla obiektów NewPerson:");
+                        for(Map.Entry pairEntry: hMNewPerson.entrySet()) {
+                            System.out.print(pairEntry.getValue() + " ");
+                        }
+                        System.out.println("\n" + "TreeMap dla obiektów NewPerson:");
+                        for(Map.Entry pairEntry: tMNewPerson.entrySet()) {
+                        System.out.print(pairEntry.getValue() + " ");
+                        }
+                        System.out.println("\n" + "HashMap dla obiektów BetterPerson:");
+                        for(Map.Entry pairEntry: tMBetterPerson.entrySet()) {
+                            System.out.print(pairEntry.getValue() + " ");
+                        }
+                        System.out.println("\n" + "TreeMap dla obiektów BetterPerson:");
+                        for(Map.Entry pairEntry: tMBetterPerson.entrySet()) {
+                            System.out.print(pairEntry.getValue() + " ");
+                        }
                         break;
                     case 4:
                         // Różnice w metodach equals() i hashCod().
@@ -253,7 +352,7 @@ public class PersonConsoleApp {
         }
     }
 
-    private void AddMapPosition(HashMap hMNewPerson, TreeMap tMNewPerson) throws PersonException {
+    private void AddMapPosition(HashMap hMNewPerson, TreeMap tMNewPerson, HashMap hMBetterPerson, TreeMap tMBetterPerson) throws PersonException {
         while (true) {
             UI.clearConsole();
                 switch (UI.enterInt(ADD_MENU + "==>> ")) {
