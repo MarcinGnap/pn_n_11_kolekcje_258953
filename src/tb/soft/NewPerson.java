@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Comparator;
 import java.util.Random;
 
 public class NewPerson {
@@ -117,5 +118,16 @@ public class NewPerson {
             throw new PersonException("Wystąpił błąd podczas tworzenia obiaktu klasy NewPerson.");
         }
         return person;
+    }
+}
+
+
+
+class FNComparatorBasic implements Comparator<NewPerson>{
+
+
+    @Override
+    public int compare(NewPerson o1, NewPerson o2) {
+        return o1.getFirstName().compareTo(o2.getFirstName());
     }
 }
