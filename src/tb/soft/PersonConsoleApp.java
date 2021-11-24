@@ -140,9 +140,9 @@ public class PersonConsoleApp {
 
     /*
      * Metoda wczytuje w konsoli dane nowej osoby, tworzy nowy obiekt
-     * klasy Person i wypełnia atrybuty wczytanymi danymi.
+     * klasy NewPerson oraz BetterPerson i wypełnia atrybuty wczytanymi danymi.
      * Walidacja poprawności danych odbywa się w konstruktorze i setterach
-     * klasy Person. Jeśli zostaną wykryte niepoprawne dane,
+     * klasy NewPerson oraz BetterPerson. Jeśli zostaną wykryte niepoprawne dane,
      * to zostanie zgłoszony wyjątek, który zawiera komunikat o błędzie.
      */
 

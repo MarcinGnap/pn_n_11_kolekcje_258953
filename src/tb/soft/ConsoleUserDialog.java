@@ -9,6 +9,12 @@ package tb.soft;
  *
  */
 
+
+  // Na potrzeby zadania klasa ta została nieruszona
+ // a jedynie wykorzystywana w kodzie.
+
+
+
 import java.util.Scanner;
 
 /**
@@ -120,7 +126,3 @@ public class ConsoleUserDialog {
 
 
 } // koniec kasy ConsoleUserDialog
-  // klasa zapożyczona z pliku przykładowego
-
-
-

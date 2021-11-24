@@ -19,6 +19,12 @@ import java.io.PrintWriter;
  *     Data:  październik 2018 r.
  */
 
+ // Na potrzeby zadania klasa ta została nieruszona
+ // a jedynie lekko wykorzystywana,
+ // w niektórych miejscach w kodzie.
+
+
+
 
 /**
  *  Typ wyliczeniowy PersonJob reprezentuje przykładowe stanowiska,
