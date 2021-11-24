@@ -25,7 +25,7 @@ public class PersonConsoleApp {
                     "0 - Zakończ program\n";
 
     private static final String MIDDLE_MENU =
-            "    M E N U   S E T  \n" +
+            "    M E N U   K O L E K C J I  \n" +
                     "1 - Dodanie elementu                           \n" +
                     "2 - Usunięcie elementu                         \n" +
                     "3 - Wypisanie elementów                        \n" +
@@ -34,7 +34,7 @@ public class PersonConsoleApp {
                     "0 - Powrót                                     \n";
 
     private static final String ADD_MENU =
-            "    M E N U   A D D  \n" +
+            "    M E N U   D O D A W A N I A  \n" +
                     "1 - Dodanie nowego elementu            \n" +
                     "2 - Dodanie tego samego elementu       \n" +
                     "3 - Dodanie takiego samego elementu    \n" +
@@ -337,7 +337,6 @@ public class PersonConsoleApp {
                 }  // koniec instrukcji switch
         }
     }
-
     private void AddListPosition(ArrayList aLNewPerson, LinkedList lLNewPerson, ArrayList aLBetterPerson, LinkedList lLBetterPerson) throws PersonException {
         while (true) {
             UI.clearConsole();
