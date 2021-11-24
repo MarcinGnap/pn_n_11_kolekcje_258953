@@ -1,6 +1,6 @@
 package tb.soft;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Program: Aplikacja działająca w oknie konsoli, która umożliwia testowanie
@@ -130,34 +130,64 @@ public class PersonConsoleApp {
     private void SetCollection() throws PersonException {
         while (true) {
             UI.clearConsole();
+            Set<NewPerson> hSNewPerson = new HashSet<>();
+            Set<NewPerson> tSNewPerson = new TreeSet<>();
             showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
-                        AddSetPosition();
+                        AddSetPosition(hSNewPerson, tSNewPerson);
                         break;
                     case 2:
                         // Usunięcie elementu.
                         break;
                     case 3:
                         // Wypisanie elementów.
+                        for(NewPerson element: hSNewPerson) {
+                            System.out.println(element + " ");
+                        }
                         break;
                     case 4:
                         // Różnice w metodach equals() i hashCod().
                         break;
                     case 0: return;
                 }  // koniec instrukcji switch
+        }
+    }
+
+    private void AddSetPosition(Set hSNewPerson, Set tSNewPerson) throws PersonException {
+        while (true) {
+            UI.clearConsole();
+            switch (UI.enterInt(ADD_MENU + "==>> ")) {
+                case 1:
+                    // Dodanie nowego elementu.
+                    currentPerson = NewPerson.createNewPerson();
+                    hSNewPerson.add(currentPerson);
+                    tSNewPerson.add(currentPerson);
+                    break;
+                case 2:
+                    // Dodanie tego samego elementu.
+                    hSNewPerson.add(currentPerson);
+                    tSNewPerson.add(currentPerson);
+                    break;
+                case 3:
+                    // Dodanie takiego samego elementu.
+                    break;
+                case 0: return;
+            }  // koniec instrukcji switch
         }
     }
 
     private void ListCollection() throws PersonException {
         while (true) {
             UI.clearConsole();
+            ArrayList<NewPerson> aLNewPerson = new ArrayList<>();
+            LinkedList<NewPerson> lLNewPerson = new LinkedList<>();
             showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
-                        AddListPosition();
+                        AddListPosition(aLNewPerson, lLNewPerson);
                         break;
                     case 2:
                         // Usunięcie elementu.
@@ -170,20 +200,47 @@ public class PersonConsoleApp {
                         break;
                     case 0: return;
                 }  // koniec instrukcji switch
+        }
+    }
+
+    private void AddListPosition(ArrayList aLNewPerson, LinkedList lLNewPerson) throws PersonException {
+        while (true) {
+            UI.clearConsole();
+            switch (UI.enterInt(ADD_MENU + "==>> ")) {
+                case 1:
+                    // Dodanie nowego elementu.
+                    currentPerson = NewPerson.createNewPerson();
+                    aLNewPerson.add(currentPerson);
+                    lLNewPerson.add(currentPerson);
+                    break;
+                case 2:
+                    // Dodanie tego samego elementu.
+                    aLNewPerson.add(currentPerson);
+                    lLNewPerson.add(currentPerson);
+                    break;
+                case 3:
+                    // Dodanie takiego samego elementu.
+                    break;
+                case 0: return;
+            }  // koniec instrukcji switch
         }
     }
 
     private void MapCollection() throws PersonException {
         while (true) {
             UI.clearConsole();
+            HashMap<Integer, NewPerson> hMNewPerson = new HashMap<>();
+            TreeMap<Integer, NewPerson> tMNewPerson = new TreeMap<>();
             showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
-                        AddMapPosition();
+                        AddMapPosition(hMNewPerson, tMNewPerson);
                         break;
                     case 2:
                         // Usunięcie elementu.
+                        int key = UI.enterInt("Podaj pozycje, z ktorej ma zostac usuniety element: ");
+                        hMNewPerson.remove(key);
                         break;
                     case 3:
                         // Wypisanie elementów.
@@ -196,54 +253,20 @@ public class PersonConsoleApp {
         }
     }
 
-    private void AddSetPosition() throws PersonException {
+    private void AddMapPosition(HashMap hMNewPerson, TreeMap tMNewPerson) throws PersonException {
         while (true) {
             UI.clearConsole();
                 switch (UI.enterInt(ADD_MENU + "==>> ")) {
                     case 1:
                         // Dodanie nowego elementu.
                         currentPerson = NewPerson.createNewPerson();
+                        hMNewPerson.put(hMNewPerson.size()+1, currentPerson);
+                        tMNewPerson.put(hMNewPerson.size()+1, currentPerson);
                         break;
                     case 2:
                         // Dodanie tego samego elementu.
-                        break;
-                    case 3:
-                        // Dodanie takiego samego elementu.
-                        break;
-                    case 0: return;
-                }  // koniec instrukcji switch
-        }
-    }
-
-    private void AddListPosition() throws PersonException {
-        while (true) {
-            UI.clearConsole();
-                switch (UI.enterInt(ADD_MENU + "==>> ")) {
-                    case 1:
-                        // Dodanie nowego elementu.
-                        currentPerson = NewPerson.createNewPerson();
-                        break;
-                    case 2:
-                        // Dodanie tego samego elementu.
-                        break;
-                    case 3:
-                        // Dodanie takiego samego elementu.
-                        break;
-                    case 0: return;
-                }  // koniec instrukcji switch
-        }
-    }
-
-    private void AddMapPosition() throws PersonException {
-        while (true) {
-            UI.clearConsole();
-                switch (UI.enterInt(ADD_MENU + "==>> ")) {
-                    case 1:
-                        // Dodanie nowego elementu.
-                        currentPerson = NewPerson.createNewPerson();
-                        break;
-                    case 2:
-                        // Dodanie tego samego elementu.
+                        hMNewPerson.put(hMNewPerson.size()+1, currentPerson);
+                        tMNewPerson.put(hMNewPerson.size()+1, currentPerson);
                         break;
                     case 3:
                         // Dodanie takiego samego elementu.
