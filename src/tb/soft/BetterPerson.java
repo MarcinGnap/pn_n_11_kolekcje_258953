@@ -49,4 +49,5 @@ class FNComparator implements Comparator<BetterPerson> {
     public boolean equals(Object obj) {
         return false;
     }
+
 }

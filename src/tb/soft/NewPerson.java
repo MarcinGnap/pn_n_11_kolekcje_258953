@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class NewPerson {
 
-    private String firstName;
-    private String lastName;
+    private static String firstName;
+    private static String lastName;
     private int birthYear;
     private String job;
 
@@ -22,7 +22,7 @@ public class NewPerson {
         setRandomJob(job_name);
     }
 
-    public String getFirstName() {
+    public static String getFirstName() {
         return firstName;
     }
 
@@ -36,7 +36,7 @@ public class NewPerson {
         this.firstName = first_name;
     }
 
-    public String getLastName() {
+    public static String getLastName() {
         return lastName;
     }
 

@@ -30,6 +30,7 @@ public class PersonConsoleApp {
                     "2 - Usunięcie elementu                         \n" +
                     "3 - Wypisanie elementów                        \n" +
                     "4 - Różnice w metodach equals() i hashCod()    \n" +
+                    "5 - Comparable vs. Comparator                  \n" +
                     "0 - Powrót                                     \n";
 
     private static final String ADD_MENU =
@@ -60,6 +61,9 @@ public class PersonConsoleApp {
      *  Referencja do obiektu, który zawiera dane aktualnej osoby.
      */
     private NewPerson currentPerson = null;
+    private BetterPerson currentBPerson = null;
+    private NewPerson additionalPerson = null;
+    private BetterPerson additionalBPerson = null;
 
 
     /*
@@ -97,14 +101,29 @@ public class PersonConsoleApp {
      */
     void showCurrentPerson() {
         showPerson(currentPerson);
+        showBPerson(currentBPerson);
     }
 
 
     /*
      * Metoda wyświetla w oknie konsoli dane osoby reprezentowanej
-     * przez obiekt klasy Person
+     * przez obiekt klasy NewPerson i BetterPerson
      */
     static void showPerson(tb.soft.NewPerson person) {
+        StringBuilder sb = new StringBuilder();
+
+        if (person != null) {
+            sb.append("Aktualna osoba: \n")
+                    .append("      Imię: ").append(person.getFirstName()).append("\n")
+                    .append("  Nazwisko: ").append(person.getLastName()).append("\n")
+                    .append("   Rok ur.: ").append(person.getBirthYear()).append("\n")
+                    .append("Stanowisko: ").append(person.getJob()).append("\n");
+        } else
+            sb.append( "Brak danych osoby\n" );
+        UI.printMessage( sb.toString() );
+    }
+
+    static void showBPerson(tb.soft.BetterPerson person) {
         StringBuilder sb = new StringBuilder();
 
         if (person != null) {
@@ -130,18 +149,19 @@ public class PersonConsoleApp {
     private void SetCollection() throws PersonException {
         while (true) {
             UI.clearConsole();
-            Set<NewPerson> hSNewPerson = new HashSet<>();
-            Set<NewPerson> tSNewPerson = new TreeSet<>();
-            Set<BetterPerson> hSBetterPerson = new HashSet<>();
-            Set<BetterPerson> tSBetterPerson = new TreeSet<>();
+            HashSet<NewPerson> hSNewPerson = new HashSet<>();
+            TreeSet<NewPerson> tSNewPerson = new TreeSet<>();
+            HashSet<BetterPerson> hSBetterPerson = new HashSet<>();
+            TreeSet<BetterPerson> tSBetterPerson = new TreeSet<>();
             showCurrentPerson();
                 switch (UI.enterInt(MIDDLE_MENU + "==>> ")) {
                     case 1:
                         // Dodatkowe menu służące do dodawania elementów.
-                        AddSetPosition(hSNewPerson, tSNewPerson);
+                        AddSetPosition(hSNewPerson, tSNewPerson, hSBetterPerson, tSBetterPerson);
                         break;
                     case 2:
                         // Usunięcie elementu.
+                        System.out.println("Brak metody.");
                         break;
                     case 3:
                         // Wypisanie elementów.
@@ -185,28 +205,43 @@ public class PersonConsoleApp {
                         System.out.println("HashCode dla HashSet bez zdefiniowanej metody: " + hSNewPerson.hashCode());
                         System.out.println("HashCode dla TreeSet ze zdefiniowana metoda: " + tSBetterPerson.hashCode() + "\n");
                         break;
+                    case 5:
+                        System.out.println("Brak metody");
+                        break;
                     case 0: return;
                 }  // koniec instrukcji switch
         }
     }
 
-    private void AddSetPosition(Set hSNewPerson, Set tSNewPerson) throws PersonException {
+    private void AddSetPosition(HashSet hSNewPerson, TreeSet tSNewPerson, HashSet hSBetterPerson, TreeSet tSBetterPerson) throws PersonException {
         while (true) {
             UI.clearConsole();
             switch (UI.enterInt(ADD_MENU + "==>> ")) {
                 case 1:
                     // Dodanie nowego elementu.
                     currentPerson = NewPerson.createNewPerson();
+                    currentBPerson = (BetterPerson) BetterPerson.createNewPerson();
                     hSNewPerson.add(currentPerson);
                     tSNewPerson.add(currentPerson);
+                    hSBetterPerson.add(currentBPerson);
+                    tSBetterPerson.add(currentBPerson);
+
                     break;
                 case 2:
                     // Dodanie tego samego elementu.
                     hSNewPerson.add(currentPerson);
                     tSNewPerson.add(currentPerson);
+                    hSBetterPerson.add(currentBPerson);
+                    tSBetterPerson.add(currentBPerson);
                     break;
                 case 3:
                     // Dodanie takiego samego elementu.
+                    additionalPerson = currentPerson;
+                    additionalBPerson = currentBPerson;
+                    hSNewPerson.add(additionalPerson);
+                    tSNewPerson.add(additionalPerson);
+                    hSBetterPerson.add(additionalBPerson);
+                    tSBetterPerson.add(additionalBPerson);
                     break;
                 case 0: return;
             }  // koniec instrukcji switch
@@ -279,6 +314,25 @@ public class PersonConsoleApp {
                         System.out.println("HashCode dla LinkedList bez zdefiniowanej metody: " + lLNewPerson.hashCode());
                         System.out.println("HashCode dla LinkedList ze zdefiniowana metoda: " + lLBetterPerson.hashCode() + "\n");
                         break;
+                    case 5:
+                        Collections.sort(aLBetterPerson);
+                        for(BetterPerson person : aLBetterPerson) {
+                            System.out.println(BetterPerson.getLastName() + ", ");
+                        }
+                        Collections.sort(aLBetterPerson, new FNComparator());
+                        for(BetterPerson person : aLBetterPerson){
+                            System.out.println(BetterPerson.getFirstName() + ", ");
+                        }
+                        Collections.sort(lLBetterPerson);
+                        for(BetterPerson person : lLBetterPerson) {
+                            System.out.println(BetterPerson.getLastName() + ", ");
+                        }
+                        Collections.sort(lLBetterPerson, new FNComparator());
+                        for(BetterPerson person : lLBetterPerson){
+                            System.out.println(BetterPerson.getFirstName() + ", ");
+                        }
+
+                        break;
                     case 0: return;
                 }  // koniec instrukcji switch
         }
@@ -291,16 +345,28 @@ public class PersonConsoleApp {
                 case 1:
                     // Dodanie nowego elementu.
                     currentPerson = NewPerson.createNewPerson();
+                    currentBPerson = (BetterPerson) BetterPerson.createNewPerson();
                     aLNewPerson.add(currentPerson);
                     lLNewPerson.add(currentPerson);
+                    aLBetterPerson.add(currentBPerson);
+                    lLBetterPerson.add(currentBPerson);
                     break;
                 case 2:
                     // Dodanie tego samego elementu.
                     aLNewPerson.add(currentPerson);
                     lLNewPerson.add(currentPerson);
+                    aLBetterPerson.add(currentBPerson);
+                    lLBetterPerson.add(currentBPerson);
                     break;
                 case 3:
                     // Dodanie takiego samego elementu.
+                    additionalPerson = currentPerson;
+                    additionalBPerson = currentBPerson;
+                    aLNewPerson.add(additionalPerson);
+                    lLNewPerson.add(additionalPerson);
+                    aLBetterPerson.add(additionalBPerson);
+                    lLBetterPerson.add(additionalBPerson);
+
                     break;
                 case 0: return;
             }  // koniec instrukcji switch
@@ -346,6 +412,17 @@ public class PersonConsoleApp {
                         break;
                     case 4:
                         // Różnice w metodach equals() i hashCod().
+                        System.out.println("Equals dla HashSet bez zdefiniowanej metody: " + hMNewPerson.equals(tMBetterPerson));
+                        System.out.println("Equals dla TreeSet ze zdefiniowana metoda: " + tMBetterPerson.equals(hMNewPerson));
+                        System.out.println("Equals dla HashSet bez zdefiniowanej metody: " + hMNewPerson.equals(tMBetterPerson));
+                        System.out.println("Equals dla TreeSet ze zdefiniowana metoda: " + tMBetterPerson.equals(hMNewPerson) + "\n");
+                        System.out.println("HashCode dla HashSet bez zdefiniowanej metody: " + hMNewPerson.hashCode());
+                        System.out.println("HashCode dla TreeSet ze zdefiniowana metoda: " + tMBetterPerson.hashCode());
+                        System.out.println("HashCode dla HashSet bez zdefiniowanej metody: " + hMNewPerson.hashCode());
+                        System.out.println("HashCode dla TreeSet ze zdefiniowana metoda: " + tMBetterPerson.hashCode() + "\n");
+                        break;
+                    case 5:
+                        System.out.println("Brak metody.");
                         break;
                     case 0: return;
                 }  // koniec instrukcji switch
@@ -359,16 +436,27 @@ public class PersonConsoleApp {
                     case 1:
                         // Dodanie nowego elementu.
                         currentPerson = NewPerson.createNewPerson();
+                        currentBPerson = (BetterPerson) BetterPerson.createNewPerson();
                         hMNewPerson.put(hMNewPerson.size()+1, currentPerson);
                         tMNewPerson.put(hMNewPerson.size()+1, currentPerson);
+                        hMBetterPerson.put(hMBetterPerson.size()+1, currentBPerson);
+                        tMBetterPerson.put(hMBetterPerson.size()+1, currentBPerson);
                         break;
                     case 2:
                         // Dodanie tego samego elementu.
                         hMNewPerson.put(hMNewPerson.size()+1, currentPerson);
                         tMNewPerson.put(hMNewPerson.size()+1, currentPerson);
+                        hMBetterPerson.put(hMBetterPerson.size()+1, currentBPerson);
+                        tMBetterPerson.put(hMBetterPerson.size()+1, currentBPerson);
                         break;
                     case 3:
                         // Dodanie takiego samego elementu.
+                        additionalPerson = currentPerson;
+                        additionalBPerson = currentBPerson;
+                        hMNewPerson.put(hMNewPerson.size()+1, additionalPerson);
+                        tMNewPerson.put(hMNewPerson.size()+1, additionalPerson);
+                        hMBetterPerson.put(hMBetterPerson.size()+1, additionalBPerson);
+                        tMBetterPerson.put(hMBetterPerson.size()+1, additionalBPerson);
                         break;
                     case 0: return;
                 }  // koniec instrukcji switch
